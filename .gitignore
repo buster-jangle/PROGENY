@@ -11,3 +11,6 @@ bin/
 
 # Ignore CLion project directory
 .idea/
+
+#ignore logs
+*.log
