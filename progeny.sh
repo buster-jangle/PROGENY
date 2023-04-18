@@ -1,6 +1,7 @@
 #!/bin/bash
 
-TEMPLATE_DIRECTORY="$HOME/Documents/CPPDEV/templates"
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+TEMPLATE_DIRECTORY=$SCRIPT_DIR
 
 if [ -z "$1" ]; then # check if project name is null
 echo "Project must have a name"
@@ -17,28 +18,12 @@ echo $CURRENT_DATE
 #rm -r $1 # test code, deletes project if recreated
 
 mkdir $PROJECT_NAME || exit
-cp -R templates/*  $PROJECT_NAME
+cp -r $TEMPLATE_DIRECTORY/* $PROJECT_NAME
+
 
 #mkdir app || exit
 cd $PROJECT_NAME
 
-#mkdir bin
-##mkdir build
-#mkdir doc
-#mkdir inc
-#mkdir src
-#mkdir experiments
-
-#cd ..
-
-#mkdir library || exit
-#cd library
-
-#mkdir build
-#mkdir doc
-#mkdir inc
-#mkdir src
-#mkdir lib
 
 #create gir ignore, to ignore compiled files
 echo "
@@ -53,34 +38,18 @@ bin
 .DS_Store
 " > .gitignore
 
-#create cmake template
-sed -i "s/"'$PROJECT_NAME'"/$1/g" CMakeLists.txt ## replace placeholder values with
-sed -i "s/"'$PROJECT_NAME'"/$1/g" application/CMakeLists.txt ## replace placeholder values with
-sed -i "s/"'$PROJECT_NAME'"/$1/g" library/CMakeLists.txt ## replace placeholder values with project name
 
-#create main.cpp template
-sed -i "s/"'$PROJECT_NAME'"/$1/g" application/src/main.cpp ## replace placeholder values with project name
-sed -i "s*"'$CURRENT_DATE'"*$CURRENT_DATE*g" application/src/main.cpp ## replace placeholder values with project name
+#sed -i "s/"'PROGENY_PROJECT_NAME'"/$1/g" ./* ## replace placeholder values with project name
+#sed -i "s*"'PROGENY_CURRENT_DATE'"*$CURRENT_DATE*g" ./* ## replace placeholder values with project creation date
 
-#create main.h template
-sed -i "s/"'$PROJECT_NAME'"/$1/g" application/inc/main.h ## replace placeholder values with project name
-sed -i "s*"'$CURRENT_DATE'"*$CURRENT_DATE*g" application/inc/main.h ## replace placeholder values with project name
+find . -type f -exec sed -i "s/PROGENY_PROJECT_NAME/$1/g" {} \;
+find . -type f -exec sed -i "s/PROGENY_CURRENT_DATE/$CURRENT_DATE/g" {} \;
 
-#create lib.cpp template
-mv library/src/lib.cpp library/src/$PROJECT_NAME.cpp
-sed -i "s/"'$PROJECT_NAME'"/$1/g" library/src/$PROJECT_NAME.cpp ## replace placeholder values with project name
-sed -i "s*"'$CURRENT_DATE'"*$CURRENT_DATE*g" library/src/$PROJECT_NAME.cpp ## replace placeholder values with project name
-
-#create lib.h template
-mv library/inc/lib.h library/inc/$PROJECT_NAME.h
-sed -i "s/"'$PROJECT_NAME'"/$1/g" library/inc/$PROJECT_NAME.h ## replace placeholder values with project name
-sed -i "s*"'$CURRENT_DATE'"*$CURRENT_DATE*g" library/inc/$PROJECT_NAME.h ## replace placeholder values with project name
-
-#create the compile&run script
-sed -i "s/"'$PROJECT_NAME'"/$1/g" compileAndRun.sh ## replace placeholder values with project name
-sed -i "s*"'$CURRENT_DATE'"*$CURRENT_DATE*g" compileAndRun.sh ## replace placeholder values with project name
+mv library/src/PROGENY_CURRENT_DATE.cpp library/src/$1.cpp
+mv library/inc/PROGENY_CURRENT_DATE.h library/inc/$1.h
 
 #copy gitignore template
+rm .git
 
 git init #create git repo
 git add .
