@@ -14,3 +14,6 @@ bin/
 
 #ignore logs
 *.log
+
+#ignore auto-generated documentation
+doxygen/
