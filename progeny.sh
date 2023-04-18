@@ -45,11 +45,13 @@ bin
 find . -type f -exec sed -i "s/PROGENY_PROJECT_NAME/$1/g" {} \;
 find . -type f -exec sed -i "s/PROGENY_CURRENT_DATE/$CURRENT_DATE/g" {} \;
 
-mv library/src/PROGENY_CURRENT_DATE.cpp library/src/$1.cpp
-mv library/inc/PROGENY_CURRENT_DATE.h library/inc/$1.h
+mv library/src/PROGENY_PROJECT_NAME.cpp library/src/$1.cpp
+mv library/inc/PROGENY_PROJECT_NAME.h library/inc/$1.h
 
 #copy gitignore template
 rm .git
+rm progeny.sh
+rm progeny
 
 git init #create git repo
 git add .
