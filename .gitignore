@@ -1,11 +1,13 @@
 
 # Ignore the build and lib dirs
 build
-lib
+cmake-build*
+lib/
 # Ignore any executables
-
-bin
+bin/
 
 # Ignore Mac specific files
 .DS_Store
 
+# Ignore CLion project directory
+.idea/
