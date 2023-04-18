@@ -5,7 +5,7 @@ TEMPLATE_DIRECTORY=$SCRIPT_DIR
 
 if [ -z "$1" ]; then # check if project name is null
 echo "Project must have a name"
-exitcd /Doc	
+exit	
 fi
 
 PROJECT_NAME=$1
@@ -18,42 +18,33 @@ echo $CURRENT_DATE
 #rm -r $1 # test code, deletes project if recreated
 
 mkdir $PROJECT_NAME || exit
-cp -r $TEMPLATE_DIRECTORY/* $PROJECT_NAME
-
+cp -a $TEMPLATE_DIRECTORY/. $PROJECT_NAME/
 
 #mkdir app || exit
-cd $PROJECT_NAME
-
-
-#create gir ignore, to ignore compiled files
-echo "
-# Ignore the build and lib dirs
-build
-lib
-# Ignore any executables
-
-bin
-
-# Ignore Mac specific files
-.DS_Store
-" > .gitignore
+cd $PROJECT_NAME || exit
 
 
 #sed -i "s/"'PROGENY_PROJECT_NAME'"/$1/g" ./* ## replace placeholder values with project name
 #sed -i "s*"'PROGENY_CURRENT_DATE'"*$CURRENT_DATE*g" ./* ## replace placeholder values with project creation date
 
-find . -type f -exec sed -i "s/PROGENY_PROJECT_NAME/$1/g" {} \;
-find . -type f -exec sed -i "s/PROGENY_CURRENT_DATE/$CURRENT_DATE/g" {} \;
+find . -type f -exec sed -i "s%PROGENY_PROJECT_NAME%$1%g" {} \;
+find . -type f -exec sed -i "s%PROGENY_CURRENT_DATE%$CURRENT_DATE%g" {} \;
 
 mv library/src/PROGENY_PROJECT_NAME.cpp library/src/$1.cpp
 mv library/inc/PROGENY_PROJECT_NAME.h library/inc/$1.h
 
 #copy gitignore template
-rm .git
+rm -rf .git
+rm -rf .gitmodules
+rm -r submodule/plog
+rm -r submodule/CLI11
 rm progeny.sh
-rm progeny
 
 git init #create git repo
+
+git submodule add git@github.com:SergiusTheBest/plog.git submodule/plog
+git submodule add git@github.com:CLIUtils/CLI11.git submodule/CLI11
+
 git add .
 git commit -m "Initial commit by PROGENY upon creation of repo"
 
