@@ -25,6 +25,23 @@ private:
 
 public:
     PROGENY_PROJECT_NAME();
+
+    /// Attempts to connect to a server at the given address
+    /// \param address The address to connect to. May be a URL or IP
+    /// \return Returns true if connected, false if connection failed.
+    bool connectToServer(string address);
+
+    ///  Multiplies two integers
+    /// \param a
+    /// \param b
+    /// \return Result of a * b
+    int multiply(int a, int b);
+
+    ///  Multiplies two floats
+    /// \param a
+    /// \param b
+    /// \return Result of a * b
+    float multiply(float a, float b);
 };
 
 

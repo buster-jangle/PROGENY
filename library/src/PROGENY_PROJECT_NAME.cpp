@@ -34,5 +34,16 @@ PROGENY_PROJECT_NAME::PROGENY_PROJECT_NAME(){
 
 }
 
+bool connectToServer(string address){
+    return true;
+}
+
+int PROGENY_PROGECT_NAME::multiply(int a, int b){
+    return a * b;
+}
+
+float PROGENY_PROGECT_NAME::multiply(float a, float b){
+    return a * b;
+}
 
 
