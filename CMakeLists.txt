@@ -9,8 +9,8 @@ set(PRIMARY_EXECUTABLE_INSTALL_PATH "/usr/local/bin")
 #set(TEST_EXECUTABLE_INSTALL_PATH)
 
 add_subdirectory(submodule)
-include_directories(${CMAKE_CURRENT_LIST_DIR}/submodule/libssh/include)
-include_directories(${CMAKE_BINARY_DIR}/submodule/libssh/include)
+include_directories(${CMAKE_CURRENT_LIST_DIR}/submodule/plog/include)
+include_directories(${CMAKE_CURRENT_LIST_DIR}/submodule/CLI11/include)
 
 add_subdirectory(library)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/library/inc/)
