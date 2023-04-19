@@ -49,4 +49,4 @@ Maintainers: Sean O'Callaghan
 Tickets: Can be opened in Github Issues.
 
 Also heres how to put a GIF in a README.md, in case you wanted to know ;)
-![Alt Text](https://commons.wikimedia.org/wiki/File:Perfect-loop-cube.gif)
+![Alt Text](https://upload.wikimedia.org/wikipedia/commons/7/79/Perfect-loop-cube.gif)
