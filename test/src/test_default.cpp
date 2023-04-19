@@ -36,7 +36,7 @@ int main(int argc, char *argv[]){
 
     PLOG_INFO << "Starting test.";
 
-    bool testStatus = true;
+    bool testStatus = false;
 
     if(!testStatus){
         PLOG_ERROR << "Test Failed";
