@@ -47,3 +47,6 @@ By default, the PROGENY templat installs primary executables and libraries in /u
 Maintainers: Sean O'Callaghan
 
 Tickets: Can be opened in Github Issues.
+
+Also heres how to put a GIF in a README.md, in case you wanted to know ;)
+![Alt Text]([https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif](https://commons.wikimedia.org/wiki/File:Perfect-loop-cube.gif))
