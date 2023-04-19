@@ -20,7 +20,7 @@ Template includes the following:
 [PLOG](https://github.com/SergiusTheBest/plog) and [CLI11](https://github.com/CLIUtils/CLI11) are required, but will be cloned automatically as git submodules when CMake is run. [Doxygen](https://github.com/doxygen/doxygen) is recommended, but not required.
 
 ## Using PROGENY
-Navigate to the directory where you want to create the project, then run `{PROGENY_ROOT}/progeny.sh {PROJECT_NAME} -g` where {PROGENY_ROOT} is the location where progeny is cloned to, and {PROJECT_NAME} is the name given to the new project. `-g` is an otional flag which will, assuming Github CLI is installed and authenticated via SSH, will also create a GitHub repo for the project with your account, and create an initial commit.
+Navigate to the directory where you want to create the project, then run `{PROGENY_ROOT}/progeny.sh {PROJECT_NAME} -g` where {PROGENY_ROOT} is the location where progeny is cloned to, and {PROJECT_NAME} is the name given to the new project. `-g` is an otional flag which, assuming Github CLI is installed and authenticated via SSH, will also create a GitHub repo for the project with your account, and create an initial commit.
 
 
 ## Building PROGENY
