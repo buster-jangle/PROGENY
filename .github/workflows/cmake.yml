@@ -17,11 +17,14 @@ jobs:
     # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
     runs-on: ubuntu-latest
 
+
     steps:
-    - name: webfactory/ssh-agent
-      uses: webfactory/ssh-agent@v0.8.0
-      with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+#SSH authentication not needed currently
+#    - name: webfactory/ssh-agent
+#      uses: webfactory/ssh-agent@v0.8.0
+#      with:
+#        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
         
     - uses: actions/checkout@v3
       with:
