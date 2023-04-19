@@ -1,6 +1,7 @@
 # PROGENY_PROJECT_NAME
 
-![example branch parameter](https://github.com/buster-jangle/PROGENY/actions/workflows/cmake.yml/badge.svg?branch=master)
+![build badge](https://github.com/buster-jangle/PROGENY/actions/workflows/cmake_build_ubuntu-latest.yml/badge.svg?branch=master)
+![build badge](https://github.com/buster-jangle/PROGENY/actions/workflows/cmake_tests_ubuntu-latest.yml/badge.svg?branch=master)
 
 C++ Project template. Run progeny.sh script to create a new project from this template. If GitCLI is installed and your account is authenticated, you can add -g flag to automatically create a github repo and push the initial commit.
 
