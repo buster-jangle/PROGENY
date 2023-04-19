@@ -8,6 +8,10 @@ set(HEADER_INSTALL_PATH "/usr/local/include")
 set(PRIMARY_EXECUTABLE_INSTALL_PATH "/usr/local/bin")
 #set(TEST_EXECUTABLE_INSTALL_PATH)
 
+add_subdirectory(submodule)
+include_directories(${CMAKE_CURRENT_LIST_DIR}/submodule/libssh/include)
+include_directories(${CMAKE_BINARY_DIR}/submodule/libssh/include)
+
 add_subdirectory(library)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/library/inc/)
 add_subdirectory(application)
