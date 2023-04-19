@@ -1,4 +1,4 @@
-name: Doxygen GitHub Pages Deploy Action
+name: Doxygen GitHub Pages Deployment
 
 on:
   push:
@@ -15,4 +15,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
           folder: documentation/
-          config_file: Doxyfile.in
+          config_file: documentation/Doxyfile.in
