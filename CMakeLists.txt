@@ -2,6 +2,11 @@
 cmake_minimum_required (VERSION 2.8.13)
 project("PROGENY_PROJECT_NAME")
 
+#Enable testing with CTest
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+    include(CTest)
+endif()
+
 #Define install paths
 set(LIBRARY_INSTALL_PATH "/usr/local/lib")
 set(HEADER_INSTALL_PATH "/usr/local/include")

@@ -9,8 +9,7 @@ add_executable("test_default" src/test_default.cpp)
 include_directories(${CMAKE_CURRENT_LIST_DIR})
 target_link_libraries(test_default PROGENY_PROJECT_NAME)
 
-add_test(NAME test_default
-        COMMAND test_default)
+add_test(NAME test_default COMMAND test_default)
 
 if(DEFINED TEST_EXECUTABLE_INSTALL_PATH)
     message(STATUS "Will install test executables at ${TEST_EXECUTABLE_INSTALL_PATH}")
