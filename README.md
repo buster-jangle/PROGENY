@@ -3,7 +3,8 @@
 ![build badge](https://github.com/buster-jangle/PROGENY/actions/workflows/cmake_build_ubuntu-latest.yml/badge.svg?branch=master)
 ![build badge](https://github.com/buster-jangle/PROGENY/actions/workflows/cmake_tests_ubuntu-latest.yml/badge.svg?branch=master)
 
-C++ Project template. Run progeny.sh script to create a new project from this template. If GitCLI is installed and your account is authenticated, you can add -g flag to automatically create a github repo and push the initial commit.
+
+PROGENY is a template for C++ projects, but is also a fully functional project its self. Primary executables just return "Hello world", test executables always pass, and the template library has one class with example functions to demonstrate Doxygen usage. B
 
 Template includes the following:
 * Default library
@@ -16,31 +17,22 @@ Template includes the following:
 * CMake script automatically pulls git submodules, and when compiled as release, builds Doxygen documentation.
 ## Required packages
 
-You will need to install [Example](http://example.org) for program_options and to use many of the libraries in [Leatherman](https://github.com/puppetlabs/leatherman).
+[PLOG](https://github.com/SergiusTheBest/plog) and [CLI11](https://github.com/CLIUtils/CLI11) are required, but will be cloned automatically as git submodules when CMake is run. [Doxygen](https://github.com/doxygen/doxygen) is recommended, but not required.
 
+## Using PROGENY
+Navigate to the directory where you want to create the project, then run `{PROGENY_ROOT}/progeny.sh {PROJECT_NAME} -g` where {PROGENY_ROOT} is the location where progeny is cloned to, and {PROJECT_NAME} is the name given to the new project. `-g` is an otional flag which will, assuming Github CLI is installed and authenticated via SSH, will also create a GitHub repo for the project with your account, and create an initial commit.
+
+
+## Building PROGENY
+uilding PROGENY also builds documentation with Doxygen (if it is installed). You can run compile.sh to build the project, which simply runs the standard cmake build commands-
 ```
-[EXAMPLE]
-git clone example
-cd example && cmake ..
-make -j128
-
-```
-
-Finally update the project() name in CMakeLists.txt.
-
-## Build the library
-
-This template is a fully functional example. Project and documentation can be built with
-
-```
-mkdir build && cd build
+mkdir build
+cd build
 cmake ..
 make -j24
 ```
 
-CMake will generate source files from template files based on the project declared in CMakeLists.txt. For cpp-project-template, git ignores the generated files. For your own project, you can check those files in, and eventually remove the template files and generation logic from CMake as you develop your project (look for the REMOVE string in CMakeLists.txt files).
-
-Tests can be run with `make test`, and the example tool can be run with `bin/cpp_project_template`.
+Tests can be run with `make test`.
 
 ## Maintenance
 
