@@ -12,14 +12,14 @@ CURRENT_DATE=$(date +"%D %T")
 echo $CURRENT_DATE
 
 
-#sed -i "s/"'PROGENY_PROJECT_NAME'"/$1/g" ./* ## replace placeholder values with project name
+#sed -i "s/"'PROGENY_PROJECT_NAME'"/$PROJECT_NAME/g" ./* ## replace placeholder values with project name
 #sed -i "s*"'PROGENY_CURRENT_DATE'"*$CURRENT_DATE*g" ./* ## replace placeholder values with project creation date
 
-find . -type f -exec sed -i "s%PROGENY_PROJECT_NAME%$1%g" {} \; #Update project name in scripts
+find . -type f -exec sed -i "s%PROGENY_PROJECT_NAME%$PROJECT_NAME%g" {} \; #Update project name in scripts
 find . -type f -exec sed -i "s%PROGENY_CURRENT_DATE%$CURRENT_DATE%g" {} \;
 
-mv library/src/PROGENY_PROJECT_NAME.cpp library/src/$1.cpp #Rename library files
-mv library/inc/PROGENY_PROJECT_NAME.h library/inc/$1.h
+mv library/src/PROGENY_PROJECT_NAME.cpp library/src/$PROJECT_NAME.cpp #Rename library files
+mv library/inc/PROGENY_PROJECT_NAME.h library/inc/$PROJECT_NAME.h
 
 # delete leftover files
 rm progeny.sh
