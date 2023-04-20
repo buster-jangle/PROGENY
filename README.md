@@ -18,14 +18,20 @@ Template includes the following:
 
 ## Required packages
 
-[PLOG](https://github.com/SergiusTheBest/plog) and [CLI11](https://github.com/CLIUtils/CLI11) are required, but will be cloned automatically as git submodules when CMake is run. [Doxygen](https://github.com/doxygen/doxygen) is recommended, but not required.
+[PLOG](https://github.com/SergiusTheBest/plog) and [CLI11](https://github.com/CLIUtils/CLI11) are required, but will be cloned automatically as git submodules when project is built. [Doxygen](https://github.com/doxygen/doxygen) is recommended, but not required.
 
 
 ## Using PROGENY
 
-Navigate to the directory where you want to create the project, then run `{PROGENY_ROOT}/progeny.sh {PROJECT_NAME} -g` where {PROGENY_ROOT} is the location where progeny is cloned to, and {PROJECT_NAME} is the name given to the new project. `-g` is an otional flag which, assuming Github CLI is installed and authenticated via SSH, will also create a GitHub repo for the project with your account, and create an initial commit.
-
-
+* Click "Use this template" to create your new repo, and give it a name. 
+* Clone the repo to a local directory
+* Run `progeny.sh` to initialize the new project. This will automatically perform the following:
+  * Replace all occurences of "PROGENY_PROJECT_NAME" with your new project name.
+  * Add a creation date to template files with the current date
+  * Reset the git repo
+  * delete `progeny.sh`
+* Your project your now be able tobuild and run tests.
+  
 ## Building PROGENY
 
 Building PROGENY also builds documentation with Doxygen (if it is installed). You can run `compile.sh` to automatically build the project, or manually build with the following commands:
@@ -34,9 +40,8 @@ mkdir build
 cd build
 cmake ..
 make -j24
+make test #Optional run unit tests defined in CMake
 ```
-After build, Tests can be run with `make test`.
-
 
 ## Install
 
