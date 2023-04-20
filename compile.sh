@@ -4,5 +4,6 @@ mkdir build
 cd build || exit
 cmake .. || exit
 make -j24 || exit
+make test
 cd ..
 

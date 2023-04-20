@@ -21,6 +21,10 @@ find . -type f -exec sed -i "s%PROGENY_CURRENT_DATE%$CURRENT_DATE%g" {} \;
 mv library/src/PROGENY_PROJECT_NAME.cpp library/src/$PROJECT_NAME.cpp #Rename library files
 mv library/inc/PROGENY_PROJECT_NAME.h library/inc/$PROJECT_NAME.h
 
+#reset git index
+rm -f .git/index
+git reset
+
 # delete leftover files
 rm progeny.sh
 echo "Done with setup"
