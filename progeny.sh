@@ -3,7 +3,7 @@
 TEMPLATE_DIRECTORY=.
 
 PROJECT_NAME="$(basename $PWD)"
-echo "Creating: PROJECT_NAME"
+echo "Creating: $PROJECT_NAME"
 
 SCRIPT_DIR="$( cd -- "$( dirname -- "{BASH_SOURCE[0]}" )" &> /dev/null && pwd )" # create a variable to store location of script execution
 TEMPLATE_DIRECTORY=$SCRIPT_DIR
