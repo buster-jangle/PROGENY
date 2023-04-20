@@ -13,19 +13,10 @@ set(HEADER_INSTALL_PATH "/usr/local/include")
 set(PRIMARY_EXECUTABLE_INSTALL_PATH "/usr/local/bin")
 #set(TEST_EXECUTABLE_INSTALL_PATH)
 
-add_subdirectory(submodule)
-include_directories(${CMAKE_CURRENT_LIST_DIR}/submodule/plog/include)
-include_directories(${CMAKE_CURRENT_LIST_DIR}/submodule/CLI11/include)
-
-add_subdirectory(library)
-include_directories(${CMAKE_CURRENT_LIST_DIR}/library/inc/)
-add_subdirectory(application)
-
-add_subdirectory(test)
-
-
-#Automatically pull/update submodules
+#Automatically pull/update submodules before adding submodules directory
 find_package(Git QUIET)
+
+##### Update submodules before adding them as subdirectories
 if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
     # Update submodules as needed
     option(GIT_SUBMODULE "Check submodules during build" ON)
@@ -39,6 +30,19 @@ if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
         endif()
     endif()
 endif()
+#Add submodule directory after updating
+add_subdirectory(submodule)
+
+#Include submodule headers
+include_directories(${CMAKE_CURRENT_LIST_DIR}/submodule/plog/include)
+include_directories(${CMAKE_CURRENT_LIST_DIR}/submodule/CLI11/include)
+
+
+add_subdirectory(library)
+include_directories(${CMAKE_CURRENT_LIST_DIR}/library/inc/)
+add_subdirectory(application)
+
+add_subdirectory(test)
 
 #Doxygen section
 #First we can indicate the documentation build as an option and set it to ON by default
