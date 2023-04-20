@@ -2,12 +2,9 @@
 
 TEMPLATE_DIRECTORY=.
 
-if [ -z "$1" ]; then # check if project name is null
-echo "Project must have a name"
-exit	
-fi
+PROJECT_NAME="$(basename $PWD)"
+echo "Creating: PROJECT_NAME"
 
-PROJECT_NAME=$1
 SCRIPT_DIR="$( cd -- "$( dirname -- "{BASH_SOURCE[0]}" )" &> /dev/null && pwd )" # create a variable to store location of script execution
 TEMPLATE_DIRECTORY=$SCRIPT_DIR
 
