@@ -40,10 +40,10 @@ public:
     /// \return Result of a * b
     int multiply(int a, int b);
 
-    ///  Multiplies two floats
+    /// Overloaded multiply function
     /// \param a
     /// \param b
-    /// \return Result of a * b
+    /// \return output
     float multiply(float a, float b);
 };
 
