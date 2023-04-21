@@ -44,6 +44,14 @@ int main(int argc, char *argv[]){
     plog::init(plog::info, logfilePath.c_str()); // Initialize the default logger instance.
     PLOGI << "Started logging.";
 
+    PROGENY_PROJECT_NAME object;
+    PROGENY_PROJECT_NAME object2;
+    object.init(plog::info, plog::get()); // Initialize a library with a PLOG appender.
+    object2.init(plog::info, plog::get()); // Initialize a library with a PLOG appender.
+
+    object.multiply(1, 2);
+    object2.multiply(1, 2);
+
     cout << "Hello world" << endl;
 
 
