@@ -2,6 +2,10 @@
 cmake_minimum_required (VERSION 2.8.13)
 project("PROGENY_PROJECT_NAME")
 
+set(PROGENY_PROJECT_NAME_VERSION_MAJOR 1)
+set(PROGENY_PROJECT_NAME_VERSION_MINOR 0)
+set(PROGENY_PROJECT_NAME_VERSION_PATCH 0)
+
 #Enable testing with CTest
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     include(CTest)
@@ -67,3 +71,19 @@ if (DOXYGEN_FOUND)
 else (DOXYGEN_FOUND)
     message("Doxygen need to be installed to generate the doxygen documentation")
 endif (DOXYGEN_FOUND)
+
+#include(InstallRequiredSystemLibraries)
+set(CPACK_PACKAGE_CONTACT yourContactInfo) #Debian packages require contact info for maintainer responsible for the package, such as your company email
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/License.txt") #Add your license file here
+set(CPACK_PACKAGE_VERSION_MAJOR "${PROGENY_PROJECT_NAME_VERSION_MAJOR}")
+set(CPACK_PACKAGE_VERSION_MINOR "${PROGENY_PROJECT_NAME_VERSION_MINOR}")
+set(CPACK_PACKAGE_VERSION_PATCH "${PROGENY_PROJECT_NAME_VERSION_PATCH}")
+
+set(CPACK_SOURCE_GENERATOR "TGZ") #Generate tar.gz compresssed sourcecode package
+
+set(CPACK_DEBIAN_FILE_NAME DEB-DEFAULT) #This is needed so that package architecture gets specified properly.
+set(CPACK_GENERATOR "DEB") #generate debian install package
+#set(CPACK_DEBIAN_PACKAGE_ARCHITECTURE CMAKE_SYSTEM_PROCESSOR) #Allow CMAKE to tell CPack the system architecture specification attached to the debian package
+#set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>= 2.3.1-6), libc6 (< 2.4)") #Set debian package dependencies (must also be debian packages)
+
+include(CPack)

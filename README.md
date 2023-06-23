@@ -43,10 +43,29 @@ make -j24
 make test #Optional run unit tests defined in CMake
 ```
 
-## Install
+If you have `ninja-build` installed, you can compile with ninja instead of make, which is substantially more efficient. ninja-build uses all available cores by default, so you need not specify -j.
 
-By default, the PROGENY templat installs primary executables and libraries in /usr/local/(lib/include). Install destinations are defined in a variable in the top level CMakeLists.txt so it can be easily changed.
+```
+mkdir build
+cd build
+cmake .. -GNinja
+ninja
+```
 
+## Install (local)
+
+By default, the PROGENY template installs primary executables (using `make install`)and libraries in /usr/local/(lib/include). Install destinations are defined in a variable in the top level CMakeLists.txt so it can be easily changed.
+
+## Release packages
+
+PROGENY's top-level CmakeLists.txt includes a basic example of using CPack to generate release packages. Release packages inherit their version number from the PROGENY_PROJECT_NAME_VERSION variables.
+
+* Generate a compressed sourcecode package: `make package_source` or `ninja package_source`
+* Generate a .deb install package: `make package` or `ninja package` (install with `sudo apt install ./name-of-your-package.deb`
+
+## License
+
+An open-source MIT License `License.txt` file is included by default. Update with your name, or replace with a boilerplate license of your choosing. Otherwise, all your projects using this template will be opensource, and licensed to me.
 
 ## Maintenance
 
