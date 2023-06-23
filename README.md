@@ -1,7 +1,7 @@
 # PROGENY_PROJECT_NAME
 ![build badge](https://github.com/buster-jangle/PROGENY/actions/workflows/cmake_build_ubuntu-latest.yml/badge.svg?branch=master)
 ![build badge](https://github.com/buster-jangle/PROGENY/actions/workflows/cmake_tests_ubuntu-latest.yml/badge.svg?branch=master)
-![build badge](https://github.com/buster-jangle/PROGENY/actions/workflows/doxygen-gh-pages.yml/badge.svg?branch=master)
+![build badge](https://github.com/buster-jangle/PROGENY/actions/workflows/doxygen-gh-pages-deploy.yml/badge.svg?branch=master)
   
 PROGENY is a template for C++ projects, plus a script to automatically generate new projects with a given name and set up a GitHub repo. PROGENY is intended to demonstrate & encourage modern C++ development practices using CMake, Git, GitHub, and Doxygen. PROGENY is also a fully functional C++ project on its own (Primary executables just return "Hello world", test executables always pass, and the template library has one class with example functions to demonstrate Doxygen usage.)
 
