@@ -60,7 +60,7 @@ add_subdirectory(test)
 #First we can indicate the documentation build as an option and set it to OFF by default
 # first we can indicate the documentation build as an option and set it to ON by default
 option(BUILD_DOC "Build documentation" OFF)
-
+if (BUILD_DOC)
 # check if Doxygen is installed
 find_package(Doxygen
             REQUIRED dot)
@@ -85,7 +85,7 @@ else (DOXYGEN_FOUND)
     message("Doxygen need to be installed to generate the doxygen documentation")
 endif (DOXYGEN_FOUND)
 #include(InstallRequiredSystemLibraries)
-
+endif(BUILD_DOC)
 
 SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Project derived from PROGENY")
 SET(CPACK_PACKAGE_VENDOR "buster-jangle")
@@ -93,15 +93,10 @@ set(CPACK_PACKAGE_CONTACT yourContactInfo) #Debian packages require contact info
 SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README.md")
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE") #Add your license file here
 
-#set(CPACK_PACKAGE_VERSION_MAJOR "${PROGENY_PROJECT_NAME_VERSION_MAJOR}") Modern CPack should set version according to CMake version
-#set(CPACK_PACKAGE_VERSION_MINOR "${PROGENY_PROJECT_NAME_VERSION_MINOR}")
-#set(CPACK_PACKAGE_VERSION_PATCH "${PROGENY_PROJECT_NAME_VERSION_PATCH}")
-
 set(CPACK_SOURCE_GENERATOR "TGZ") #Generate tar.gz compresssed sourcecode package
 
 set(CPACK_DEBIAN_FILE_NAME DEB-DEFAULT) #This is needed so that package architecture gets specified properly.
 set(CPACK_GENERATOR "DEB") #generate debian install package
-#set(CPACK_DEBIAN_PACKAGE_ARCHITECTURE CMAKE_SYSTEM_PROCESSOR) #Allow CMAKE to tell CPack the system architecture specification attached to the debian package
 #set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>= 2.3.1-6), libc6 (< 2.4)") #Set debian package dependencies (must also be debian packages)
 
 include(CPack)

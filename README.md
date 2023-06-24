@@ -1,7 +1,7 @@
 
 <h1 style="font-size: 24;" align="center"> PROGENY_PROJECT_NAME </h1>
 
-<p align="center"> <img src="docs/dox_assets/dna_icon.svg" alt="missing dna helix" width="100"/></p>
+<p align="center"> <img src="https://upload.wikimedia.org/wikipedia/commons/8/80/DNA_icon.svg" alt="dna_icon.svg" width="100"/></p>
 
 <h1 style="font-size: 24;" align="center"> 
 
