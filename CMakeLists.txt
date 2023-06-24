@@ -91,7 +91,7 @@ SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Project derived from PROGENY")
 SET(CPACK_PACKAGE_VENDOR "buster-jangle")
 set(CPACK_PACKAGE_CONTACT yourContactInfo) #Debian packages require contact info for maintainer responsible for the package, such as your company email
 SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README.md")
-set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/License.txt") #Add your license file here
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE") #Add your license file here
 
 #set(CPACK_PACKAGE_VERSION_MAJOR "${PROGENY_PROJECT_NAME_VERSION_MAJOR}") Modern CPack should set version according to CMake version
 #set(CPACK_PACKAGE_VERSION_MINOR "${PROGENY_PROJECT_NAME_VERSION_MINOR}")
