@@ -58,7 +58,6 @@ add_subdirectory(test)
 
 #Doxygen section
 #First we can indicate the documentation build as an option and set it to OFF by default
-# first we can indicate the documentation build as an option and set it to ON by default
 option(BUILD_DOC "Build documentation" OFF)
 if (BUILD_DOC)
 # check if Doxygen is installed
