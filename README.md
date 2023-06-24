@@ -1,6 +1,7 @@
 <div style="text-align: center;">
 
-# PROGENY_PROJECT_NAME
+PROGENY_PROJECT_NAME
+
 <img src="docs/dox_assets/dna_icon.svg" alt="drawing" width="100"/>
 
 
