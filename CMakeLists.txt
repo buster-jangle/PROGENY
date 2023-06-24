@@ -61,7 +61,8 @@ add_subdirectory(test)
 option(BUILD_DOC "Build documentation" OFF)
 if (BUILD_DOC)
 # check if Doxygen is installed
-find_package(Doxygen)
+find_package(Doxygen
+        REQUIRED dot)
 if (DOXYGEN_FOUND)
     # set input and output files
     set(DOXYGEN_IN docs/Doxyfile.in)
