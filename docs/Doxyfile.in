@@ -1285,7 +1285,7 @@ HTML_STYLESHEET        =
 # list). For an example see the documentation.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_EXTRA_STYLESHEET  = "docs/dox_assets/dox_flat_theme/doxygen-style.css" \
+HTML_EXTRA_STYLESHEET  = "@CMAKE_CURRENT_SOURCE_DIR@/docs/dox_assets/dox_flat_theme/doxygen-style.css"
 
 
 # The HTML_EXTRA_FILES tag can be used to specify one or more extra images or
@@ -1296,7 +1296,11 @@ HTML_EXTRA_STYLESHEET  = "docs/dox_assets/dox_flat_theme/doxygen-style.css" \
 # files will be copied as-is; there are no commands or markers available.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_EXTRA_FILES       =
+HTML_EXTRA_FILES       = "@CMAKE_CURRENT_SOURCE_DIR@/docs/dox_assets/dox_flat_theme/img/closed-folder.png" \
+                         "@CMAKE_CURRENT_SOURCE_DIR@/docs/dox_assets/dox_flat_theme/img/document.png"
+                         "@CMAKE_CURRENT_SOURCE_DIR@/docs/dox_assets/dox_flat_theme/img/off_sync.png"
+                         "@CMAKE_CURRENT_SOURCE_DIR@/docs/dox_assets/dox_flat_theme/img/on_sync.png"
+                         "@CMAKE_CURRENT_SOURCE_DIR@/docs/dox_assets/dox_flat_theme/img/opened-folder.png"
 
 # The HTML_COLORSTYLE_HUE tag controls the color of the HTML output. Doxygen
 # will adjust the colors in the style sheet and background images according to
