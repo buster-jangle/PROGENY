@@ -1,6 +1,8 @@
 
 <h1 style="font-size: 24;" align="center"> PROGENY_PROJECT_NAME </h1>
 
+<p align="center"> <img src="docs/dox_assets/dna_icon.svg" alt="missing dna helix" width="100"/></p>
+
 <h1 style="font-size: 24;" align="center"> 
 
 ![build badge](https://github.com/buster-jangle/PROGENY/actions/workflows/cmake_build_ubuntu-latest.yml/badge.svg?branch=master) 
