@@ -1,13 +1,21 @@
 
-cmake_minimum_required (VERSION 2.8.13)
-project("PROGENY_PROJECT_NAME")
+#cmake_minimum_required (VERSION 2.8.13)
+#project("PROGENY_PROJECT_NAME")
+cmake_minimum_required (VERSION 3.0.0)
+project("PROGENY_PROJECT_NAME"
+        VERSION 1.0.1
+        LANGUAGES CXX
+        DESCRIPTION "Put a one-liner description of your project here, and it will be included in documentation"
+        )
 
-set(PROGENY_PROJECT_NAME_VERSION_MAJOR 1)
-set(PROGENY_PROJECT_NAME_VERSION_MINOR 0)
-set(PROGENY_PROJECT_NAME_VERSION_PATCH 0)
+
+
+#set(PROGENY_PROJECT_NAME_VERSION_MAJOR 1)
+#set(PROGENY_PROJECT_NAME_VERSION_MINOR 0)
+#set(PROGENY_PROJECT_NAME_VERSION_PATCH 0)
 
 #Enable testing with CTest
-if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME) #This makes sure to only include Ctest if this is the main project (Avoids pointless testing is this project is used as a submodule)
     include(CTest)
 endif()
 
@@ -49,14 +57,19 @@ add_subdirectory(application)
 add_subdirectory(test)
 
 #Doxygen section
-#First we can indicate the documentation build as an option and set it to ON by default
+#First we can indicate the documentation build as an option and set it to OFF by default
+# first we can indicate the documentation build as an option and set it to ON by default
 option(BUILD_DOC "Build documentation" ON)
+
 # check if Doxygen is installed
-find_package(Doxygen)
+find_package(Doxygen
+            REQUIRED dot)
 if (DOXYGEN_FOUND)
     # set input and output files
-    set(DOXYGEN_IN ${CMAKE_CURRENT_LIST_DIR}/docs/Doxyfile.in)
+    set(DOXYGEN_IN docs/Doxyfile.in)
     set(DOXYGEN_OUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
+    #set(DOXYGEN_PROJECT_BRIEF ${CMAKE_PROJECT_DESCRIPTION})
+    #set(DOXYGEN_PROJECT_NAME ${CMAKE_PROJECT_NAME})
 
     # request to configure the file
     configure_file(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
@@ -65,19 +78,24 @@ if (DOXYGEN_FOUND)
     # note the option ALL which allows to build the docs together with the application
     add_custom_target( doc_doxygen ALL
             COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
-            WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
+            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
             COMMENT "Generating API documentation with Doxygen"
             VERBATIM )
 else (DOXYGEN_FOUND)
     message("Doxygen need to be installed to generate the doxygen documentation")
 endif (DOXYGEN_FOUND)
-
 #include(InstallRequiredSystemLibraries)
+
+
+SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Project derived from PROGENY")
+SET(CPACK_PACKAGE_VENDOR "buster-jangle")
 set(CPACK_PACKAGE_CONTACT yourContactInfo) #Debian packages require contact info for maintainer responsible for the package, such as your company email
+SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README.md")
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/License.txt") #Add your license file here
-set(CPACK_PACKAGE_VERSION_MAJOR "${PROGENY_PROJECT_NAME_VERSION_MAJOR}")
-set(CPACK_PACKAGE_VERSION_MINOR "${PROGENY_PROJECT_NAME_VERSION_MINOR}")
-set(CPACK_PACKAGE_VERSION_PATCH "${PROGENY_PROJECT_NAME_VERSION_PATCH}")
+
+#set(CPACK_PACKAGE_VERSION_MAJOR "${PROGENY_PROJECT_NAME_VERSION_MAJOR}") Modern CPack should set version according to CMake version
+#set(CPACK_PACKAGE_VERSION_MINOR "${PROGENY_PROJECT_NAME_VERSION_MINOR}")
+#set(CPACK_PACKAGE_VERSION_PATCH "${PROGENY_PROJECT_NAME_VERSION_PATCH}")
 
 set(CPACK_SOURCE_GENERATOR "TGZ") #Generate tar.gz compresssed sourcecode package
 
