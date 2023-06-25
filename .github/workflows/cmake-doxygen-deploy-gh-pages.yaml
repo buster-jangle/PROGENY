@@ -1,0 +1,46 @@
+name: Generate and Deploy Doxygen Documentation
+
+on:
+  push:
+    branches:
+      - release  # or specify your desired branch here
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install Doxygen
+        uses: doxygen/doxygen-action@v2
+
+      - name: Set up CMake
+        uses: actions/setup-cmake@v1
+        with:
+          cmake-version: '3.21'
+
+      - name: Configure and Build
+        run: |
+          mkdir build
+          cd build
+          cmake ..
+          cmake --build .
+
+      - name: Generate Doxygen Documentation
+        run: |
+          cd build
+          make doc
+
+      - name: Deploy to gh-pages
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          cd docs/doc_doxygen/html  # Modify this path if your documentation output location is different
+          git init
+          git checkout --orphan gh-pages
+          git add .
+          git commit -m "Deploy Doxygen documentation"
+          git remote add origin ${{ github.repository }}
+          git push --force origin gh-pages
