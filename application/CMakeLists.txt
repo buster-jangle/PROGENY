@@ -1,4 +1,4 @@
-
+cmake_minimum_required (VERSION 3.0.0)
 
 set(CMAKE_C_COMPILER "g") #specify g++ compiler
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_LIST_DIR}/bin) # put compiled executable in bin/
@@ -12,7 +12,7 @@ target_link_libraries("PROGENY_PROJECT_NAME-bin" "PROGENY_PROJECT_NAME")
 target_link_libraries("PROGENY_PROJECT_NAME-bin" Threads::Threads)
 set_target_properties("PROGENY_PROJECT_NAME-bin" PROPERTIES OUTPUT_NAME "PROGENY_PROJECT_NAME")
 
-if(DEFINED PRIMARY_EXECUTABLE_INSTALL_PATH AND INSTALL_EXECUTABLES)
+if(DEFINED PRIMARY_EXECUTABLE_INSTA_PATH AND INSTALL_EXECUTABLES)
     message(STATUS "Will install primary executables at ${PRIMARY_EXECUTABLE_INSTALL_PATH}")
     install(TARGETS PROGENY_PROJECT_NAME-bin DESTINATION ${PRIMARY_EXECUTABLE_INSTALL_PATH})
 else()
