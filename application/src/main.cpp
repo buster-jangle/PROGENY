@@ -55,14 +55,18 @@ int main(int argc, char *argv[]){
     ////Set CLI defaults
     std::string logfilePath = "logs/PROGENY_PROJECT_NAME.log"; // Default logfile path
     std::string logSeverityInputStr = "WARN"; // default severity level of application-level logging
-
+    bool printVersion = false;
     ///// Configure and parse CLI options
     CLI::App cli{"-PROGENY_PROJECT_NAME application description-"};
     cli.add_option("-l,--logfile", logfilePath, "Logfile destination. Default: ./logs/PROGENY_PROJECT_NAME.log");
     cli.add_option("-s,--severity", logSeverityInputStr, "Logging minimum severity threshold. Default: INFO. Acceptable values:\n\tNONE (Dont log)\n\tVERB\n\tDEBUG\n\tINFO\n\tWARN\n\tERROR\n\tFATAL")->check(WarningLevel);
+    cli.add_flag("-v,--version", printVersion, "Print version information");
 
     CLI11_PARSE(cli);
-
+    if(printVersion){ // Print version information and exit
+        printf("%s-%s", APPLICATION_VERSION, APPLICATION_RELEASE);
+        return EXIT_SUCCESS;
+    }
     static plog::RollingFileAppender<plog::CsvFormatter> fileAppender(logfilePath.c_str(), 1048576, 3); // Create the file appender, up to 1MB per file, rolling over 3 files
     static plog::ConsoleAppender<plog::TxtFormatter> consoleAppender; // Create the console appender
     plog::Severity applicationLogSeverity = plog::severityFromString(logSeverityInputStr.c_str()); // stringify the log severity level from console input

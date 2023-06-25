@@ -8,7 +8,6 @@ project("PROGENY_PROJECT_NAME"
         LANGUAGES CXX
         DESCRIPTION "Put a one-liner description of your project here, and it will be included in documentation"
         )
-
 #Add submodule directory first. Adding it later will override the following CPack options
 add_subdirectory(submodule)
 
