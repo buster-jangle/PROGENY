@@ -44,4 +44,4 @@ jobs:
           git add .
           git commit -m "Deploy Doxygen documentation"
           git remote add origin ${{ github.repository }}
-          git push --force origin gh-pages
+          git push --force origin gh-pages:${{ github.ref }}
