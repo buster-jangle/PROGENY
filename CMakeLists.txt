@@ -54,7 +54,10 @@ add_subdirectory(library)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/library/inc/)
 add_subdirectory(application)
 
-add_subdirectory(test)
+# PInclude and build tests if this is the main project
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+    add_subdirectory(test)
+endif()
 
 #Doxygen section
 #First we can indicate the documentation build as an option and set it to OFF by default
@@ -97,5 +100,7 @@ set(CPACK_SOURCE_GENERATOR "TGZ") #Generate tar.gz compresssed sourcecode packag
 set(CPACK_DEBIAN_FILE_NAME DEB-DEFAULT) #This is needed so that package architecture gets specified properly.
 set(CPACK_GENERATOR "DEB") #generate debian install package
 #set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>= 2.3.1-6), libc6 (< 2.4)") #Set debian package dependencies (must also be debian packages)
+
+#set(CPACK_PACKAGE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/artifacts") #Set destination for packages
 
 include(CPack)
