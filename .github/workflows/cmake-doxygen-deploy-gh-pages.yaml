@@ -45,5 +45,5 @@ jobs:
           git checkout --orphan gh-pages
           git add .
           git commit -m "Deploy Doxygen documentation"
-          git remote add origin https://github.com/${{ github.repository }}
+          git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           git push --force origin gh-pages
