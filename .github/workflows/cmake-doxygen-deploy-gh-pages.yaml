@@ -35,6 +35,8 @@ jobs:
           make doc_doxygen #Tell make to generate only doxygen documents
 
       - name: Deploy to gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
@@ -43,5 +45,5 @@ jobs:
           git checkout --orphan gh-pages
           git add .
           git commit -m "Deploy Doxygen documentation"
-          git remote add origin https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git remote add origin https://github.com/${{ github.repository }}
           git push --force origin gh-pages
