@@ -27,8 +27,7 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake ..
-          cmake --build .
+          cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_DOC=ON #Run cmake and specify to build documentation
 
       - name: Generate Doxygen Documentation
         run: |
@@ -39,7 +38,7 @@ jobs:
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          cd docs/doc_doxygen/html  # Modify this path if your documentation output location is different
+          cd build/doc_doxygen/html  # Modify this path if your documentation output location is different
           git init
           git checkout --orphan gh-pages
           git add .
