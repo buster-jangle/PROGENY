@@ -64,6 +64,10 @@ ninja
 
 By default, the PROGENY template installs primary executables (using `make install`)and libraries in /usr/local/(lib/include). Install destinations are defined in a variable in the top level CMakeLists.txt so it can be easily changed.
 
+## Tests
+
+PROGENY includes two example test file. `tests/CMakeLists.txt` will include any .cpp file in `tests/src/` as a unit test executable to be run by CTest. The CTest test suite only passes when all executable return EXIT_SUCCESS. Tests can be run by calling `make test` or `ninja test`. PROGENY includes a GitHub Actions workflow in `.github/workflows` which automatically builds the project and runs tests each time a commit is made to the `release` branch.
+
 ## Release packages
 
 PROGENY's top-level CmakeLists.txt includes a basic example of using CPack to generate release packages. Release packages inherit their version number from the PROGENY_PROJECT_NAME_VERSION variables.
@@ -72,6 +76,39 @@ PROGENY's top-level CmakeLists.txt includes a basic example of using CPack to ge
 
 
 * Generate a .deb install package: `make package` or `ninja package` (install with `sudo apt install ./name-of-your-package.deb`
+
+
+## Configuration flags
+
+### CMake Configuration Options
+
+The configuration options default to a maximal development build. Packages generated with default options will include headers, a shared library, a static library, and all executables excluding tests:
+
+#### BUILD OPTIONS
+
+- `BUILD_TEST`: Enable and build unit tests (Default: ON)
+- `BUILD_SHARED_LIBS`: Build a dynamic(shared) binary of the project library (Default: OFF)
+- `BUILD_STATIC_LIBS`: Build a static binary of the project library libraries (Default: ON)
+
+#### LINKING OPTIONS
+
+- `LINK_SHARED_LIBS`: Link the primary executables and tests to a dynamic binary of the project library (Default: OFF)
+
+##### INSTALL OPTIONS
+
+- `INSTALL_HEADERS`: Install/package with headers. Set to ON when building a release for developers (Default: ON)
+- `INSTALL_SHARED_LIBS`: Use when building a release for developers to link code against, or when building an executable for users when LINK_SHARED_LIBS=ON (Default: ON)
+- `INSTALL_STATIC_LIBS`: Set to ON when building a release for developers to link other code against (Default: ON)
+- `INSTALL_EXECUTABLES`: Set to OFF if strictly creating a library for build environments, and it does not include executable tools (Default: ON)
+
+#### Configuration Overrides
+
+The values of some options may be overridden based on certain conditions:
+
+- If `LINK_SHARED_LIBS` is enabled, it overrides the `BUILD_SHARED_LIBS` and `INSTALL_SHARED_LIBS` options, setting them to ON.
+- If `INSTALL_SHARED_LIBS` is enabled but `BUILD_SHARED_LIBS` is not, it overrides the `BUILD_SHARED_LIBS` option, setting it to ON.
+- If `INSTALL_STATIC_LIBS` is enabled but `BUILD_STATIC_LIBS` is not, it overrides the `BUILD_STATIC_LIBS` option, setting it to ON.
+
 
 ## Documentation
 
