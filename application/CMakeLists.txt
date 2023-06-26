@@ -4,7 +4,7 @@ add_definitions(-DAPPLICATION_VERSION="${CMAKE_PROJECT_VERSION}") # Make project
 add_definitions(-DAPPLICATION_RELEASE="${RELEASE}") # Make project release string available to the library as a definition
 
 ##### Link to the core PROGENY_PROJECT_NAME project library.
-if(LINK_SHARED_LIB)
+if(LINK_SHARED_LIBS)
     list(APPEND LINK_APPLICATION_LIST PROGENY_PROJECT_NAME) # Link the application to a shared version of the library
     message(STATUS "Linking application to shared library: PROGENY_PROJECT_NAME")
 else()

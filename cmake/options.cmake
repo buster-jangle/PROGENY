@@ -4,7 +4,7 @@ option(BUILD_SHARED_LIBS "Build the shared libraries" OFF)
 option(BUILD_STATIC_LIBS "Build the static libraries" ON)
 
 #### LINKING OPTIONS
-option(LINK_SHARED_LIB "Link the project to a shared version of project library" OFF)
+option(LINK_SHARED_LIBS "Link the project to a shared version of project library" OFF)
 
 ##### INSTALL OPTIONS
 option(INSTALL_HEADERS "Install/package with headers. Set to ON when building for developers" ON)
@@ -13,7 +13,7 @@ option(INSTALL_STATIC_LIBS "Install/package static libraries. Set to ON when bui
 option(INSTALL_EXECUTABLES "Install/package with executables. Set to OFF if strictly creating a library for build environments" ON)
 
 if(LINK_SHARED_LIBS)
-    set(BUILD_SHARED_LIBS ON) # override BUILD_SHARED_LIBS option if LINK_SHARED_LIB is enabled
+    set(BUILD_SHARED_LIBS ON) # override BUILD_SHARED_LIBS option if LINK_SHARED_LIBS is enabled
     set(INSTALL_SHARED_LIBS ON)
     message(STATUS "Override: BUILD_SHARED_LIBS and INSTALL_SHARED_LIBS set to ON due to LINK_SHARED_LIBS.")
 endif()
@@ -41,7 +41,7 @@ function(print_cmake_options)
 
     # LINKING OPTIONS
     message(STATUS "LINKING OPTIONS")
-    message(STATUS "  LINK_SHARED_LIB: ${LINK_SHARED_LIB}")
+    message(STATUS "  LINK_SHARED_LIBS: ${LINK_SHARED_LIBS}")
 
     # INSTALL OPTIONS
     message(STATUS "INSTALL OPTIONS")
