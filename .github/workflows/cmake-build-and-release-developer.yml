@@ -63,6 +63,7 @@ jobs:
           path: |
             build/*.deb 
             build/*.tar.gz
+            RELEASE_VERSION
 
   release:
     # This job depends on the successful completion of the "build" job.
@@ -83,6 +84,18 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+
+      - name: Create Release and Upload Artifacts
+        id: create_release
+        run: |
+          VERSION=$(cat RELEASE_VERSION)
+          TAG_NAME="tags/v${VERSION}"
+          TAG_NAME=${GITHUB_REF/refs\/tags\//}
+          gh release create $TAG_NAME --repo ${{ github.repository }} --title "Release $TAG_NAME" --draft
+          gh release upload $TAG_NAME ./* --repo ${{ github.repository }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REF: ${{ github.ref }}
 
 #      # Creates a new release using the tag that triggered the workflow.
 #      - name: Create Release
