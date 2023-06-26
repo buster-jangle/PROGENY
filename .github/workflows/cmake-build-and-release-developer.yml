@@ -76,15 +76,16 @@ jobs:
         with:
           name: package
 
+
+#      - name: Create Release
+#        id: create_release
+#        run: |
+#          gh release create ${{ github.ref }} --repo ${{ github.repository }} --title "Release ${{ github.ref }}" --draft
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
       # Creates a new release using the tag that triggered the workflow.
-      - name: Create Release
-        id: create_release
-        run: |
-          gh release create ${{ github.ref }} --repo ${{ github.repository }} --title "Release ${{ github.ref }}" --draft
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-
       - name: Create Release and Upload Artifacts
         id: create_release
         run: |
