@@ -23,13 +23,9 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-#      # Installs the necessary dependencies.
-#      - name: Install Dependencies
-#        run: sudo apt-get install -y cmake ninja-build
-
-#       Sets up CMake for use in the workflow.
-      - name: Setup CMake
-        uses: lukka/get-cmake@latest  # Installs CMake and Ninja quicker
+      # Installs the necessary dependencies.
+      - name: Install Dependencies
+        run: sudo apt-get install -y cmake ninja-build gh
 
       # Configures the CMake project. Generate Ninja-build makefiles
       - name: Configure CMake
@@ -82,35 +78,45 @@ jobs:
       # Creates a new release using the tag that triggered the workflow.
       - name: Create Release
         id: create_release
-        uses: actions/create-release@v1
+        run: |
+          gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
+          gh release create ${{ github.ref }} --repo ${{ github.repository }} --title "Release ${{ github.ref }}" --draft
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: true
-          prerelease: false
 
-      # Uploads the .deb file as an asset of the release.
-      - name: Upload Release Asset
-        id: upload-release-asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./package/project.deb
-          asset_name: project.deb
-          asset_content_type: application/octet-stream
 
-      # Uploads the tar.gz archive as an asset of the release.
-      - name: Upload Release Asset
-        id: upload-release-asset2
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./package/project.tar.gz
-          asset_name: project.tar.gz
-          asset_content_type: application/octet-stream
+#      # Creates a new release using the tag that triggered the workflow.
+#      - name: Create Release
+#        id: create_release
+#        uses: actions/create-release@v1
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#          tag_name: ${{ github.ref }}
+#          release_name: Release ${{ github.ref }}
+#          draft: true
+#          prerelease: false
+
+#      # Uploads the .deb file as an asset of the release.
+#      - name: Upload Release Asset
+#        id: upload-release-asset
+#        uses: actions/upload-release-asset@v1
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#          upload_url: ${{ steps.create_release.outputs.upload_url }}
+#          asset_path: ./package/project.deb
+#          asset_name: project.deb
+#          asset_content_type: application/octet-stream
+#
+#      # Uploads the tar.gz archive as an asset of the release.
+#      - name: Upload Release Asset
+#        id: upload-release-asset2
+#        uses: actions/upload-release-asset@v1
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#          upload_url: ${{ steps.create_release.outputs.upload_url }}
+#          asset_path: ./package/project.tar.gz
+#          asset_name: project.tar.gz
+#          asset_content_type: application/octet-stream
