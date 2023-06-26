@@ -1,4 +1,3 @@
-
 #Configure CPack for generating a .deb package
 message(STATUS "Configuring CPack...")
 #set(CPACK_PACKAGING_INSTALL_PREFIX "/")
@@ -27,6 +26,11 @@ set(CPACK_DEBIAN_FILE_NAME DEB-DEFAULT)
 message(STATUS "
 CPACK_PACKAGE_NAME=${CPACK_PACKAGE_NAME}
 INSTALL_HEADERS=${INSTALL_HEADERS}
+CMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
 ")
 
 include(CPack) #CPack must be included after configuration or it will use defaults
+
+
+
+

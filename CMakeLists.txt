@@ -15,7 +15,6 @@ set(CMAKE_EXTRA_SCRIPT_DIR ${PROJECT_SOURCE_DIR}/cmake/)
 include(${CMAKE_EXTRA_SCRIPT_DIR}/options.cmake)
 include(${CMAKE_EXTRA_SCRIPT_DIR}/set_release.cmake)
 include(${CMAKE_EXTRA_SCRIPT_DIR}/config_doxygen.cmake)
-include(${CMAKE_EXTRA_SCRIPT_DIR}/config_cpack.cmake)
 
 #Include submodule headers
 include_directories(${CMAKE_CURRENT_LIST_DIR}/submodule/plog/include)
@@ -31,7 +30,23 @@ set(HEADER_INSTALL_PATH "/usr/local/include")
 set(PRIMARY_EXECUTABLE_INSTALL_PATH "/usr/local/bin")
 #set(TEST_EXECUTABLE_INSTALL_PATH)
 
-#Add projct library and application directory
+### List of libraries to link the project application to
+set(LINK_APPLICATION_LIST)
+list(APPEND LINK_APPLICATION_LIST
+        Threads::Threads
+        )
+### List of libraries to link the project library to
+set(LINK_PROJECT_LIBRARY_LIST)
+list(APPEND LINK_PROJECT_LIBRARY_LIST
+        Threads::Threads
+        )
+### List of libraries to link the tests to
+set(LINK_TESTS_LIST)
+list(APPEND LINK_TESTS_LIST
+        Threads::Threads
+        )
+
+#Add the project library and application directories
 add_subdirectory(library)
 add_subdirectory(application)
 
@@ -44,8 +59,7 @@ if((CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME) AND BUILD_TEST)
 endif()
 
 
-
-
+include(${CMAKE_EXTRA_SCRIPT_DIR}/config_cpack.cmake)
 
 
 

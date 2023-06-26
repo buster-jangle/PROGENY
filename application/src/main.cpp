@@ -51,7 +51,6 @@ struct LogLevelValidator : public CLI::Validator {
 const static LogLevelValidator WarningLevel;
 
 int main(int argc, char *argv[]){
-
     ////Set CLI defaults
     std::string logfilePath = "logs/PROGENY_PROJECT_NAME.log"; // Default logfile path
     std::string logSeverityInputStr = "WARN"; // default severity level of application-level logging
@@ -70,7 +69,6 @@ int main(int argc, char *argv[]){
     static plog::RollingFileAppender<plog::CsvFormatter> fileAppender(logfilePath.c_str(), 1048576, 3); // Create the file appender, up to 1MB per file, rolling over 3 files
     static plog::ConsoleAppender<plog::TxtFormatter> consoleAppender; // Create the console appender
     plog::Severity applicationLogSeverity = plog::severityFromString(logSeverityInputStr.c_str()); // stringify the log severity level from console input
-
     plog::init(applicationLogSeverity, &fileAppender).addAppender(&consoleAppender); // Initialize the logger with the both appenders.
 
     PLOGI << "Started logging.";
