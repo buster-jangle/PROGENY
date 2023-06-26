@@ -17,7 +17,7 @@ if(NOT DEFINED RELEASE)
                 OUTPUT_VARIABLE DIRTY
         )
         if ( NOT "${DIRTY}" STREQUAL "" )
-            set(DIRTY_FLAG "*")
+            set(DIRTY_FLAG "*") #Dirty releases have unadded and uncommitted contents. Git will refuse to tag a release if this is in the name.
         else()
             set(DIRTY_FLAG "")
         endif()
