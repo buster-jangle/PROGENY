@@ -63,7 +63,7 @@ jobs:
           path: |
             build/*.deb 
             build/*.tar.gz
-            RELEASE_VERSION
+            build/RELEASE_VERSION
 
   release:
     # This job depends on the successful completion of the "build" job.
@@ -89,6 +89,7 @@ jobs:
       - name: Create Release and Upload Artifacts
         id: create_release
         run: |
+          ls
           VERSION=$(cat RELEASE_VERSION)
           TAG_NAME="tags/v${VERSION}"
           TAG_NAME=${GITHUB_REF/refs\/tags\//}
