@@ -1,0 +1,116 @@
+
+# The name of the workflow.
+name: CMake Build and Release
+
+# This workflow is triggered when a new tag is pushed to the branch named "release-latest".
+on:
+  push:
+    branches:
+      - release-latest
+    tags:
+      - '*'
+
+env:
+  CMAKE_PARAMS: -DRELEASE_TYPE=Release -DBUILD_TESTS=ON
+
+# The jobs that the workflow will execute.
+jobs:
+  build:
+    # This job runs on the latest version of Ubuntu.
+    runs-on: ubuntu-latest
+    steps:
+      # Checks out a copy of your repository.
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      # Installs the necessary dependencies.
+      - name: Install Dependencies
+        run: sudo apt-get install -y cmake ninja-build
+
+      # Sets up CMake for use in the workflow.
+#      - name: Setup CMake
+#        uses: lukka/get-cmake@latest  # Installs CMake and Ninja quicker
+
+      # Configures the CMake project. Generate Ninja-build makefiles
+      - name: Configure CMake
+        run: cmake -S . -B build -GNinja ${{ env.CMAKE_PARAMS }}
+
+      # Builds the CMake project.
+      - name: Build Project
+        run: |
+          ninja -C build/
+          echo "Build completed. Current directory and its contents:"
+          pwd
+          ls build -al
+
+      # Run tests
+      - name: Install and Package Project
+        run: |
+          ninja -C build test
+          echo "Ran tests. Current directory and its contents:"
+          pwd
+          ls build -al
+
+      # Creates a debian package and a compressed sourcecode package
+      - name: Create artifacts
+        run: |
+          ninja -C build package package_source
+          echo "Artifacts creation completed. Current directory and its contents:"
+          pwd
+          ls -al
+
+      # Uploads the .deb file and tar.gz archive as "artifacts" of the GitHub Action.
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: package
+          path: |
+            build/*.deb 
+            build/*.tar.gz
+
+  release:
+    # This job depends on the successful completion of the "build" job.
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      # Downloads the artifacts uploaded in the "build" job.
+      - name: Download Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: package
+
+      # Creates a new release using the tag that triggered the workflow.
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      # Uploads the .deb file as an asset of the release.
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./package/project.deb
+          asset_name: project.deb
+          asset_content_type: application/octet-stream
+
+      # Uploads the tar.gz archive as an asset of the release.
+      - name: Upload Release Asset
+        id: upload-release-asset2
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./package/project.tar.gz
+          asset_name: project.tar.gz
+          asset_content_type: application/octet-stream
