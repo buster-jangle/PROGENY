@@ -12,17 +12,20 @@ option(INSTALL_SHARED_LIBS "Install/package shared libraries. Use when building 
 option(INSTALL_STATIC_LIBS "Install/package static libraries. Set to ON when building for developers" ON)
 option(INSTALL_EXECUTABLES "Install/package with executables. Set to OFF if strictly creating a library for build environments" ON)
 
-
-### OVERRIDES
 if(LINK_SHARED_LIBS)
-    message(STATUS "Linking application to shared project library. Enabling BUILD_SHARED_LIBS and INSTALL_SHARED_LIBS")
-    set(BUILD_SHARED_LIBS ON) #override BUILD_SHARED_LIBS option if LINK_SHARED_LIB is enabled
+    set(BUILD_SHARED_LIBS ON) # override BUILD_SHARED_LIBS option if LINK_SHARED_LIB is enabled
     set(INSTALL_SHARED_LIBS ON)
+    message(STATUS "Override: BUILD_SHARED_LIBS and INSTALL_SHARED_LIBS set to ON due to LINK_SHARED_LIBS.")
 endif()
 
-if(BUILD_SHARED_LIBS AND NOT INSTALL_LIBS)
-    message(WARNING "BUILD_SHARED_LIBS is ON, but INSTALL_LIBS is off. Executables built with shared libs depend on them being installed. Ovveriding with BUILD_SHARED_LIBS=OFF")
-    set(BUILD_SHARED_LIBS OFF)
+if(INSTALL_SHARED_LIBS AND NOT BUILD_SHARED_LIBS)
+    set(BUILD_SHARED_LIBS ON)
+    message(STATUS "Override: BUILD_SHARED_LIBS set to ON due to INSTALL_SHARED_LIBS.")
+endif()
+
+if(INSTALL_STATIC_LIBS AND NOT BUILD_STATIC_LIBS)
+    set(BUILD_STATIC_LIBS ON)
+    message(STATUS "Override: BUILD_STATIC_LIBS set to ON due to INSTALL_STATIC_LIBS.")
 endif()
 
 ### SHOW ENABLED OPTIONS
