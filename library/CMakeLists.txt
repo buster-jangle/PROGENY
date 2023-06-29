@@ -4,7 +4,7 @@ add_definitions(-DLIBRARY_VERSION="${CMAKE_PROJECT_VERSION}") #Make project vers
 add_definitions(-DLIBRARY_RELEASE="${RELEASE}") #Make project release string available to the library as a definition
 
 # By default, get all source files in src/ directory and compile them into PROGENY_PROJECT_NAME library
-file(GLOB LIB_SOURCES "src/*.cpp" "src/*.c")
+file(GLOB LIB_SOURCES "${CMAKE_CURRENT_LIST_DIR}/src/*.cpp" " ${CMAKE_CURRENT_LIST_DIR}/src/*.c")
 
 set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_LIST_DIR}/lib) # put compiled library in lib/
 set(LIBRARY_HEADERS ${CMAKE_CURRENT_LIST_DIR}/inc/PROGENY_PROJECT_NAME.h) #

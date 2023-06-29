@@ -32,7 +32,7 @@ endif()
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_LIST_DIR}/bin)  # Put compiled executables in bin/
 
-file(GLOB SRC_FILES "${CMAKE_CURRENT_LIST_DIR}/src/*.{cpp,c}")  # Get all source files with .cpp or .c extension in src/
+file(GLOB SRC_FILES "${CMAKE_CURRENT_LIST_DIR}/src/*.cpp" "${CMAKE_CURRENT_LIST_DIR}/src/*.c")
 
 foreach(SRC_FILE ${SRC_FILES})
     get_filename_component(EXECUTABLE_NAME ${SRC_FILE} NAME_WE)  # Get the file name without extension

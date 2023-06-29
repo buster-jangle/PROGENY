@@ -61,7 +61,7 @@ int main(int argc, char *argv[]){
     cli.add_option("-s,--severity", logSeverityInputStr, "Logging minimum severity threshold. Default: INFO. Acceptable values:\n\tNONE (Dont log)\n\tVERB\n\tDEBUG\n\tINFO\n\tWARN\n\tERROR\n\tFATAL")->check(WarningLevel);
     cli.add_flag("-v,--version", printVersion, "Print version information");
 
-    CLI11_PARSE(cli);
+    CLI11_PARSE(cli, argc, argv);
     if(printVersion){ // Print version information and exit
         printf("%s-%s", APPLICATION_VERSION, APPLICATION_RELEASE);
         return EXIT_SUCCESS;
