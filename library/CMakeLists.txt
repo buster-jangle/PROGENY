@@ -13,10 +13,14 @@ set(LIBRARY_HEADERS ${CMAKE_CURRENT_LIST_DIR}/inc/PROGENY_PROJECT_NAME.h) #
 include_directories(${CMAKE_CURRENT_LIST_DIR}/inc/)
 
 #Static library always builds
-add_library(PROGENY_PROJECT_NAME-static STATIC ${LIB_SOURCES}) #Library is not declared static or shared. This is defined in the top-level cmake options
-target_link_libraries(PROGENY_PROJECT_NAME-static ${LINK_PROJECT_LIBRARY_LIBS}) #Link to a list of libraries declared in top-level cmake
-set_target_properties(PROGENY_PROJECT_NAME-static PROPERTIES OUTPUT_NAME "PROGENY_PROJECT_NAME")
-set_target_properties(PROGENY_PROJECT_NAME-static PROPERTIES PUBLIC_HEADER ${LIBRARY_HEADERS})
+add_library(GATEWAY-static STATIC ${LIB_SOURCES}) #Library is not declared static or shared. This is defined in the top-level cmake options
+message(STATUS "Linking project library libs:")
+foreach(lib ${LINK_PROJECT_LIBRARY_LIST})
+	message(STATUS "\t${lib}")
+endforeach()
+target_link_libraries(GATEWAY-static ${LINK_PROJECT_LIBRARY_LIST}) #Link to a list of libraries declared in top-level cmake
+set_target_properties(GATEWAY-static PROPERTIES OUTPUT_NAME "GATEWAY")
+set_target_properties(GATEWAY-static PROPERTIES PUBLIC_HEADER ${LIBRARY_HEADERS})
 
 if(BUILD_SHARED_LIBS OR LINK_SHARED_LIBS) 	#Optionally build shared library
 	add_library(PROGENY_PROJECT_NAME SHARED ${LIB_SOURCES})
