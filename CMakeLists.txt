@@ -35,6 +35,7 @@ set(LINK_APPLICATION_LIST)
 list(APPEND LINK_APPLICATION_LIST
         Threads::Threads
         )
+find_package(Threads) #Almost all projects should have multithreading
 ### List of libraries to link the project library to
 set(LINK_PROJECT_LIBRARY_LIST)
 list(APPEND LINK_PROJECT_LIBRARY_LIST
