@@ -2,9 +2,9 @@ cmake_minimum_required (VERSION 3.0.0)
 
 add_definitions(-DLIBRARY_VERSION="${CMAKE_PROJECT_VERSION}") #Make project version available to the library as a definition
 add_definitions(-DLIBRARY_RELEASE="${RELEASE}") #Make project release string available to the library as a definition
-set(LIB_SOURCES
-		src/PROGENY_PROJECT_NAME.cpp
-		)
+
+# By default, get all source files in src/ directory and compile them into PROGENY_PROJECT_NAME library
+file(GLOB LIB_SOURCES "src/*.cpp" "src/*.c")
 
 set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_LIST_DIR}/lib) # put compiled library in lib/
 set(LIBRARY_HEADERS ${CMAKE_CURRENT_LIST_DIR}/inc/PROGENY_PROJECT_NAME.h) #
