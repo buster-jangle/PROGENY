@@ -24,3 +24,9 @@ endif()
 #Add submodule subdirectories here. PLOG and CLI11 are included by default for standardization of logging and CLI interfaces
 add_subdirectory(plog)
 add_subdirectory(CLI11)
+
+#Avoid building FTXUI tests/docs/examples and stuff
+set(FTXUI_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+set(FTXUI_BUILD_DOCS OFF CACHE BOOL "" FORCE)
+set(FTXUI_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+add_subdirectory(FTXUI)

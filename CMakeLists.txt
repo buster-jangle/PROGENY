@@ -43,12 +43,18 @@ set(PRIMARY_EXECUTABLE_INSTALL_PATH "/usr/local/bin")
 set(LINK_APPLICATION_LIST)
 list(APPEND LINK_APPLICATION_LIST
         Threads::Threads
+        ftxui::screen
+        ftxui::dom
+        ftxui::component
         )
 find_package(Threads) #Almost all projects should have multithreading
 ### List of libraries to link the project library to
 set(LINK_PROJECT_LIBRARY_LIST)
 list(APPEND LINK_PROJECT_LIBRARY_LIST
         Threads::Threads
+        ftxui::screen
+        ftxui::dom
+        ftxui::component
         )
 ### List of libraries to link the tests to
 set(LINK_TESTS_LIST)
