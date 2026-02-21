@@ -11,9 +11,11 @@ project("PROGENY_PROJECT_NAME"
 #Add submodule directory first. Adding it later will override the following CPack options
 add_subdirectory(submodule)
 
-if(CMAKE_BUILD_TYPE=="")
-    set(CMAKE_BUILD_TYPE "Release")
+#Set build type to release, unless otherwise specified. Also restrict available build types for managable conditional setting
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Build type" FORCE)
 endif()
+set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
 
 set(CMAKE_EXTRA_SCRIPT_DIR ${PROJECT_SOURCE_DIR}/cmake/)
 include(${CMAKE_EXTRA_SCRIPT_DIR}/options.cmake)
