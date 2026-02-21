@@ -35,8 +35,9 @@ public:
     /// \return pointer to a plog appender
     bool init(plog::Severity severity, plog::IAppender* appender);
 
-   /// Prints detailed build info
-	   static void printVersionInfo();
+    /// Returns a string with detailed build info for version tracking
+    /// \return string containing project name, git hash, git branch, build date, and builder host name.
+    std::string getVersionInfo();
 
     ///  Multiplies two integers
     /// \param a

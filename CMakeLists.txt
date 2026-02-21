@@ -28,6 +28,7 @@ gather_build_info()
 #Include submodule headers
 include_directories(${CMAKE_CURRENT_LIST_DIR}/submodule/plog/include)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/submodule/CLI11/include)
+include_directories(${CMAKE_CURRENT_LIST_DIR}/submodule/FTXUI/include)
 #include project library header
 include_directories(${CMAKE_CURRENT_LIST_DIR}/library/inc/)
 #include project application headers
