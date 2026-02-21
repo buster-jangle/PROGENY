@@ -39,6 +39,16 @@ bool PROGENY_PROJECT_NAME::init(plog::Severity severity, plog::IAppender* append
     return true;
 }
 
+void PROGENY_PROJECT_NAME::printVersionInfo(){
+    printf("Project:    %s\n",   PROJECT_NAME);
+    printf("Branch:     %s\n",   GIT_BRANCH);
+    printf("Commit:     %s%s\n", GIT_HASH, GIT_DIRTY ? " (dirty)" : "");
+    printf("Build Type: %s\n",   BUILD_TYPE);
+    printf("Build Date: %s\n",   BUILD_DATE);
+    printf("Build Host: %s\n",   BUILD_HOST);
+    return true;
+}
+
 int PROGENY_PROJECT_NAME::multiply(int a, int b){
     PLOGI.printf("Object %016X: Multiplying %i * %i", this, a, b);
     return a * b;

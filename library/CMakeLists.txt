@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.0.0)
+cmake_minimum_required (VERSION 3.8.0)
 
 add_definitions(-DLIBRARY_VERSION="${CMAKE_PROJECT_VERSION}") #Make project version available to the library as a definition
 add_definitions(-DLIBRARY_RELEASE="${RELEASE}") #Make project release string available to the library as a definition
@@ -48,6 +48,9 @@ if(DEFINED LIBRARY_INSTALL_PATH AND INSTALL_SHARED_LIBS AND BUILD_SHARED_LIBS)
 			LIBRARY DESTINATION ${LIBRARY_INSTALL_PATH}
 			PUBLIC_HEADER DESTINATION ${HEADER_INSTALL_PATH})
 endif()
+
+target_apply_build_info(PROGENY_PROJECT_NAME)
+target_apply_build_info(PROGENY_PROJECT_NAME-static)
 
 
 

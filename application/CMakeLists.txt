@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0.0)
+cmake_minimum_required(VERSION 3.8.0)
 
 add_definitions(-DAPPLICATION_VERSION="${CMAKE_PROJECT_VERSION}") # Make project version available to the library as a definition
 add_definitions(-DAPPLICATION_RELEASE="${RELEASE}") # Make project release string available to the library as a definition
