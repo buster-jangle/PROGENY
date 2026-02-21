@@ -48,3 +48,5 @@ foreach(SRC_FILE ${SRC_FILES})
         message(STATUS "No primary executable '${EXECUTABLE_NAME}' will be installed. INSTALL_EXECUTABLES is OFF or PRIMARY_EXECUTABLE_INSTALL_PATH is undefined")
     endif()
 endforeach()
+
+target_apply_build_info(${EXECUTABLE_NAME} )

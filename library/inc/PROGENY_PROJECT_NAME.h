@@ -35,7 +35,8 @@ public:
     /// \return pointer to a plog appender
     bool init(plog::Severity severity, plog::IAppender* appender);
 
-	void PROGENY_PROJECT_NAME::printVersionInfo()
+   /// Prints detailed build info
+	   static void printVersionInfo();
 
     ///  Multiplies two integers
     /// \param a

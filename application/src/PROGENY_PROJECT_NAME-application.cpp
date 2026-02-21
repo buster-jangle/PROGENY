@@ -49,6 +49,15 @@ struct LogLevelValidator : public CLI::Validator {
 };
 const static LogLevelValidator WarningLevel;
 
+void printApplicationVersionInfo(){
+    printf("Project:    %s\n",   PROJECT_NAME);
+    printf("Branch:     %s\n",   GIT_BRANCH);
+    printf("Commit:     %s%s\n", GIT_HASH, GIT_DIRTY ? " (dirty)" : "");
+    printf("Build Type: %s\n",   BUILD_TYPE);
+    printf("Build Date: %s\n",   BUILD_DATE);
+    printf("Build Host: %s\n",   BUILD_HOST);
+}
+
 int main(int argc, char *argv[]){
     ////Set CLI defaults
     std::string logfilePath = "logs/PROGENY_PROJECT_NAME.log"; // Default logfile path
@@ -62,7 +71,7 @@ int main(int argc, char *argv[]){
 
     CLI11_PARSE(cli, argc, argv);
     if(printVersion){ // Print version information and exit
-        printf("%s-%s", APPLICATION_VERSION, APPLICATION_RELEASE);
+        printApplicationVersionInfo();
         return EXIT_SUCCESS;
     }
     static plog::RollingFileAppender<plog::CsvFormatter> fileAppender(logfilePath.c_str(), 1048576, 3); // Create the file appender, up to 1MB per file, rolling over 3 files
