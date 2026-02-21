@@ -60,7 +60,7 @@ void printApplicationVersionInfo(){
 
 int main(int argc, char *argv[]){
     ////Set CLI defaults
-    std::string logfilePath = "logs/PROGENY_PROJECT_NAME.log"; // Default logfile path
+    std::string logfilePath = "/var/logs//PROGENY_PROJECT_NAME/PROGENY_PROJECT_NAME.log"; // Default logfile path
     std::string logSeverityInputStr = "WARN"; // default severity level of application-level logging
     bool printVersion = false;
     ///// Configure and parse CLI options
